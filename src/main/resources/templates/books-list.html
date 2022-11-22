@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/books/search}" method="get">
+    <input type="text" th:name="query">
+    <input type="checkbox" name="isExact">
+    <input type="submit" th:value="get">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Year </th>
+        <th> Cost </th>
+        <th> Author </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${books}">
+        <td th:text="${item.title}"></td>
+        <td th:text="${item.description}"></td>
+        <td th:text="${item.year}"></td>
+        <td th:text="${item.cost}"></td>
+        <td th:text="${item.author.firstName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

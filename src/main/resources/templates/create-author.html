@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{/authors/create}" method="post" th:object="${author}">
+        <label for="fname">FirstName</label><br>
+        <input id="fname" type="text" th:field="*{firstName}"><br>
+        <br>
+
+        <label for="mname">MiddleName</label><br>
+        <input id="mname" type="text" th:field="*{middleName}"><br>
+        <br>
+
+        <label for="lname">LastName</label><br>
+        <input id="lname" type="text" th:field="*{lastName}"><br>
+        <br>
+
+        <label for="country">Country</label><br>
+        <input id="country" type="text" th:field="*{country}"><br>
+        <br>
+
+        <label for="year">BornYear</label><br>
+        <input
+                id="year"
+                type="number"
+                min="1900"
+                max="2022"
+                th:field="*{bornYear}"
+        ><br>
+        <br>
+
+        <input type="submit">
+    </form>
+</body>
+</html>

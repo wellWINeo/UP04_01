@@ -5,16 +5,17 @@
     <title>Calculator</title>
 </head>
 <body>
-    <form data-th-action="@{/}" th:object="${data}" method="post">
-        <input type="number" th:field="*{A}">
-        <select th:field="*{Op}">
+    <form data-th-action="@{/result}" th:object="${data}">
+        <input th:name="a" type="number" th:field="*{A}">
+        <select th:name="op" th:field="*{Op}">
             <option th:value="'+'">+</option>
             <option th:value="'-'">-</option>
             <option th:value="'*'">*</option>
             <option th:value="'/'">/</option>
         </select>
-        <input type="number" th:field="*{B}">
-        <input type="submit">
+        <input type="number" th:name="b" th:field="*{B}">
+        <input type="submit" th:method="post" th:value="post">
+        <input type="submit" th:method="get" th:value="get">
     </form>
 </body>
 </html>
