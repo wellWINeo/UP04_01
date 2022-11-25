@@ -3,32 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-<form th:action="@{/books/search}" method="get">
-    <input type="text" th:name="query">
-    <input type="checkbox" name="isExact">
-    <input type="submit" th:value="get">
-</form>
-<table>
-    <thead>
-    <tr>
-        <th> Title </th>
-        <th> Description </th>
-        <th> Year </th>
-        <th> Cost </th>
-        <th> Author </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item : ${books}">
-        <td th:text="${item.title}"></td>
-        <td th:text="${item.description}"></td>
-        <td th:text="${item.year}"></td>
-        <td th:text="${item.cost}"></td>
-        <td th:text="${item.author.firstName}"></td>
-    </tr>
-    </tbody>
-</table>
+    <div class="container">
+        <form th:action="@{/books/search}" method="get">
+            <input type="text" th:name="query">
+            <label>
+                <input type="checkbox" name="isExact"/>
+                <span>Точный</span>
+            </label>
+            <br>
+            <input type="submit" th:value="get" class="btn">
+            <a href="/books/create" class="btn">create</a>
+        </form>
+        <table>
+            <thead>
+            <tr>
+                <th> Title </th>
+                <th> Description </th>
+                <th> Year </th>
+                <th> Cost </th>
+                <th> Author </th>
+                <th> Edit </th>
+                <th> Delete </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${books}">
+                <td th:text="${item.title}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.year}"></td>
+                <td th:text="${item.cost}"></td>
+                <td th:text="${item.author.firstName}"></td>
+                <td>
+                    <a class="btn" th:href="'/books/create?id=' + ${item.id}">edit</a>
+                </td>
+                <td>
+                    <a class="btn" th:href="'/books/delete?id=' + ${item.id}">delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

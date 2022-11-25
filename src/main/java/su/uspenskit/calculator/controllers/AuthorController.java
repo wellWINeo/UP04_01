@@ -33,8 +33,9 @@ public class AuthorController {
     }
 
     @GetMapping("/authors/create")
-    public String createIndex(Model model) {
-        model.addAttribute("author", new Author());
+    public String createIndex(@RequestParam(required = false) Long id, Model model) {
+        var entity = id != null ? this.authorRepository.findById(id) : new Author();
+        model.addAttribute("author", entity);
         return "create-author";
     }
 
@@ -44,6 +45,13 @@ public class AuthorController {
         var authors = this.authorRepository.findAll();
         model.addAttribute("authors", authors);
         return "authors-list";
+    }
+
+    @GetMapping("/authors/delete")
+    @ResponseBody()
+    public String delete(@RequestParam() Long id) {
+        this.authorRepository.deleteById(id);
+        return "Deleted";
     }
 
 }

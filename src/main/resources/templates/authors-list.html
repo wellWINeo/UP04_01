@@ -3,32 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    <form th:action="@{/authors/search}" method="get">
-        <input type="text" th:name="query">
-        <input type="checkbox" name="isExact">
-        <input type="submit" th:value="get">
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th> FirstName </th>
-                <th> MiddleName </th>
-                <th> LastName </th>
-                <th> Country </th>
-                <th> BornYear </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="item : ${authors}">
-                <td th:text="${item.firstName}"></td>
-                <td th:text="${item.middleName}"></td>
-                <td th:text="${item.lastName}"></td>
-                <td th:text="${item.country}"></td>
-                <td th:text="${item.bornYear}"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <form th:action="@{/authors/search}" method="get">
+            <input type="text" th:name="query">
+            <label>
+                <input type="checkbox" name="isExact"/>
+                <span>Точный</span>
+            </label>
+            <br>
+            <input type="submit" class="btn" th:value="get">
+            <a href="/authors/create" class="btn">Create</a>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th> FirstName </th>
+                    <th> MiddleName </th>
+                    <th> LastName </th>
+                    <th> Country </th>
+                    <th> BornYear </th>
+                    <th> Edit </th>
+                    <th> Delete </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${authors}">
+                    <td th:text="${item.firstName}"></td>
+                    <td th:text="${item.middleName}"></td>
+                    <td th:text="${item.lastName}"></td>
+                    <td th:text="${item.country}"></td>
+                    <td th:text="${item.bornYear}"></td>
+                    <td>
+                        <a th:href="'/authors/create?id=' + ${item.id}">edit</a>
+                    </td>
+                    <td>
+                        <a th:href="'/authors/delete?id=' + ${item.id}">delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

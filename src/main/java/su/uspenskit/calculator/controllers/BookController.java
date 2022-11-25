@@ -2,10 +2,7 @@ package su.uspenskit.calculator.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import su.uspenskit.calculator.models.Author;
 import su.uspenskit.calculator.models.Book;
 import su.uspenskit.calculator.repos.AuthorRepository;
@@ -41,8 +38,9 @@ public class BookController {
     }
 
     @GetMapping("/books/create")
-    public String createIndex(Model model) {
-        model.addAttribute("book", new Book());
+    public String createIndex(@RequestParam(required = false) Long id, Model model) {
+        var entity = id != null ? this.bookRepository.findById(id) : new Book();
+        model.addAttribute("book", entity);
         model.addAttribute("authors", this.authorRepository.findAll());
         model.addAttribute("author");
         return "create-book";
@@ -56,5 +54,12 @@ public class BookController {
         var books = this.bookRepository.findAll();
         model.addAttribute("books", books);
         return "books-list";
+    }
+
+    @GetMapping("/books/delete")
+    @ResponseBody()
+    public  String delete(@RequestParam() Long id) {
+        this.bookRepository.deleteById(id);
+        return "Deleted!";
     }
 }
