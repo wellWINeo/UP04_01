@@ -12,7 +12,7 @@
             <input type="hidden" th:field="*{id}">
 
             <label for="fname">FirstName</label><br>
-            <input id="fname" type="text" th:field="*{firstName}"><br>
+            <input id="fname" type="text" th:field="*{firstName}" required th:required="'Необходимо заполнить поле'"><br>
             <br>
 
             <label for="mname">MiddleName</label><br>
@@ -20,20 +20,23 @@
             <br>
 
             <label for="lname">LastName</label><br>
-            <input id="lname" type="text" th:field="*{lastName}"><br>
+            <input id="lname" type="text" th:field="*{lastName}" required th:required="'Необходимо заполнить поле'"><br>
             <br>
 
             <label for="country">Country</label><br>
-            <input id="country" type="text" th:field="*{country}"><br>
+            <input id="country" type="text" th:field="*{country}" required th:required="'Необходимо заполнить поле'"><br>
             <br>
 
             <label for="year">BornYear</label><br>
             <input
                     id="year"
                     type="number"
+                    required
                     min="1900"
                     max="2022"
                     th:field="*{bornYear}"
+                    th:min="1900"
+                    th:max="2022"
             ><br>
             <br>
 

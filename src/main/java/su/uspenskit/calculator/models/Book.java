@@ -1,15 +1,26 @@
 package su.uspenskit.calculator.models;
 
+import org.hibernate.mapping.Set;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty()
     private String title;
     private String description;
+    @Max(2022)
+    @Min(1900)
     private int year;
+
+    @Positive
     private int cost;
 
     @ManyToOne(fetch = FetchType.EAGER)

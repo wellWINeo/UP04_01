@@ -2,9 +2,12 @@ package su.uspenskit.calculator.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import su.uspenskit.calculator.models.Author;
 import su.uspenskit.calculator.repos.AuthorRepository;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class AuthorController {
@@ -40,7 +43,10 @@ public class AuthorController {
     }
 
     @PostMapping("/authors/create")
-    public String create(@ModelAttribute("author") Author author, Model model) {
+    public String create(@Valid @ModelAttribute("author") Author author,
+                         BindingResult bindingResult,
+                         Model model) {
+        if (bindingResult.hasErrors()) return "authors-list";
         this.authorRepository.save(author);
         var authors = this.authorRepository.findAll();
         model.addAttribute("authors", authors);

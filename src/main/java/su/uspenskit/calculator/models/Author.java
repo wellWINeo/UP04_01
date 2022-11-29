@@ -1,19 +1,31 @@
 package su.uspenskit.calculator.models;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Заполните имя")
     private String firstName;
     private String middleName;
+    @NotEmpty(message =  "Заполните фамилию")
     private String lastName;
+
+    @Length(min = 1)
     private String country;
+
+    @Max(2022)
+    @Min(1900)
     private int bornYear;
 
     public Author() { }
