@@ -7,6 +7,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -25,6 +27,9 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
+
+    @ManyToMany
+    private List<Tag> tags = new ArrayList<>();
 
     public Book() { }
 
@@ -82,5 +87,13 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
